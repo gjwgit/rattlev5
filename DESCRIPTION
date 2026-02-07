@@ -1,7 +1,7 @@
 Package: rattle
 Type: Package
 Title: Graphical User Interface for Data Science in R
-Version: 5.5.2
+Version: 5.5.3
 Date: 2026-02-07
 Authors@R: c(person("Graham", "Williams",
 	   	    role=c("aut", "cph", "cre"),
