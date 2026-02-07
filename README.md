@@ -11,17 +11,19 @@ interface are captured as an R script that can be readily executed in
 R independently of the Rattle interface.
 
 Rattle is Free (as in Libre) Open Source Software and the source code
-is available here on Bitbucket. We give you the freedom to review the
+is available on Bitbucket. We give you the freedom to review the
 code, use it for whatever purpose you like, and to extend it however
 you like, without restriction, except that if you then distribute your
 changes you also need to distribute your source code too.
 
-Whilst Rattle is available from [CRAN](https://cran.r-project.org/)
-you can install the latest developments direct from Togaware using:
-
-```R
-> install.packages("rattle", repos="https://rattle.togaware.com", type="source")
-```
+Rattle V5 is available from [CRAN](https://cran.r-project.org/), but
+requires the deprecated RGtk2 pacakge. If you have RGtk2 installed
+then you can still use Rattle V5. Otherwise visit
+https://rattle.togaware.com for a modern re-implementation of the
+rattle UI utilising much of the same underlying R code for the data
+analyses. The new UI, otherwise known as Rattle V6, is written using
+the modern [Flutter](https://flutter.org) framework while retaining
+the flavour of Rattle V5.
 
 Rattle is developed as an open source product by
 [Togaware](https://www.togaware.com/) and is freely available to
@@ -31,31 +33,32 @@ anyone. Details are available from the
 RGtk2 Archived on CRAN December 2021
 =====================================
 
-Currently RGtk2, required for the GUI tools, is archived on CRAN. To
-use the GUI tools install RGtk2 from the Microsoft CRAN snapshots:
+The RGtk2 pacakge, required for the GUI tools in this R implementation
+of Rattle V5, is archived on CRAN. To use the GUI tools from the now
+deprecated Rattle V5 user interface you will need to find a version of
+RGtk2 to run on your R instance.
 
 On Linux:
 
 ```
-> install.packages("https://cran.microsoft.com/snapshot/2021-12-01/src/contrib/RGtk2_2.20.36.2.tar.gz", repos=NULL)
+> install.packages("https://access.togaware.com/RGtk2_2.20.36.2.tar.gz", repos=NULL)
 ```
 
 On Windows:
 
 ```
-> install.packages("https://cran.microsoft.com/snapshot/2021-12-01/bin/windows/contrib/4.1/RGtk2_2.20.36.2.zip", repos=NULL)
+> install.packages("https://access.togaware.com/RGtk2_2.20.36.2.zip", repos=NULL)
 ```
 
 On Mac:
 
 ```
-> install.packages("https://cran.microsoft.com/snapshot/2021-12-01/bin/macosx/contrib/4.1/RGtk2_2.20.36.2.tgz", repos=NULL)
+> install.packages("https://access.togaware.com/RGtk2_2.20.36.2.tgz", repos=NULL)
 ```
 
-Rattle utilises many other R packages that may become archived on CRAN
-over time, even though they likely remain fit for purpose for
-rattle. They can be similarly installed, if required, from the
-Microsoft CRAN snapshots.
+Even though we make these archived versions of the UI available for
+Rattle V5 you are strong encouraged to migrate to [Rattle
+V6](https://rattle.togaware.com).
 
 Reporting an Issue
 ==================
@@ -76,7 +79,7 @@ Your example should be:
 
 * Minimal - The least number of steps to replicate the issue
 * Complete - Include all the steps required to reproduce
-* Reproducible - Test the steps yourself to ensure it reproduces the problem 
+* Reproducible - Test the steps yourself to ensure it reproduces the problem
 
 Be sure to include the output of:
 

@@ -2,7 +2,7 @@
 #
 # BASE FUNCTIONS
 #
-# Time-stamp: <Monday 2023-03-27 08:45:40 +1100 Graham Williams>
+# Time-stamp: <Sunday 2026-01-18 13:39:43 +1100 Graham Williams>
 #
 # Copyright (c) 2009-2023 Togaware Pty Ltd
 #
@@ -47,8 +47,8 @@ if(getRversion() >= "2.15.1")
                            "ignore",
                            "digit", "variable",
                            "split.labels",
-                           "rbin",                    
-                           "pacc",                    
+                           "rbin",
+                           "pacc",
                            "x",
                            "y",
                            "lbl",
@@ -82,11 +82,11 @@ Rtxt <- function(...)
 
 RtxtNT <- Rtxt
 
-VERSION <- "5.5.2"
-DATE <- "2023-04-29"
+VERSION <- "5.5.3"
+DATE <- "2026-01-28"
 
 # 091223 Rtxt does not work until the rattle GUI has started, perhaps?
-COPYRIGHT <- paste(Rtxt("Copyright"), "(C) 2006-2023 Togaware Pty Ltd.")
+COPYRIGHT <- paste(Rtxt("Copyright"), "(C) 2006-2026 Togaware Pty Ltd.")
 
 # Acknowledgements: Frank Lu has provided much feedback and has
 # extensively tested early versions of Rattle. Many colleagues at the
@@ -213,7 +213,7 @@ toga <- function() browseURL("https://rattle.togaware.com")
 
 rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 {
-  
+
   # Ensure the RGtk2 package is installed. If not fail, requesting the
   # user to install it. Don't try installing it ourselves as there are
   # often issues and they need to be resolved outside of Rattle!
@@ -228,11 +228,11 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
               "\nPlease install the package using, for example:",
               "\n\n  install.packages(\"RGtk2\")\n\n"))
   }
-  
+
   # 101113 Add the useGtkBuilder argument so that a user can override
   # the automatic determination of which one to use: libglade versus
   # GtkBuilder. If NULL then automatically determine.
-  
+
   # 090517 Require pmml. Now that there is an indication on the Data
   # tab as to whether the varaiable (i.e., a transformed variable) can
   # be exported to PMML we need pmml to be loaded. Thus pmml is now a
@@ -273,7 +273,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 
   # crs <<- new.env()
   sapply(ls(crs), function(x) assign(x, NULL, envir=crs))
-  
+
   # crv$tooltiphack <<- tooltiphack # Record the value globally
 
   # 090525 Move to having the Setting option work on Linux. Thus
@@ -285,16 +285,16 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 
   # 20161113 Test if a windowing capability is available and if not
   # fail out of rattle().
-  
+
   if (! RGtk2::gtkInit())
     stop("Can't load RGtk2.\n",
          "  A windowing system can't be accessed?\n",
          "  Maybe you are using a remote terminal (ssh) or RStudio browser connection.\n",
          "  Consider using remote desktop, ssh -X, or X2Go depending on your platform.\n",
          "  Running rattle() locally on a desktop is the default.")
-  
+
   # 101113 Use GtkBUilder or LibGlade?
-  
+
   # 20101009 We need to handle the case of an old install of Gtk
   # (e.g., 2.12.9 on MS/Windows or GNU/Linux) where GtkBuilder does
   # not recognise the 'requires' element. We construct a string for
@@ -312,7 +312,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 
   crv$useGtkBuilder <- useGtkBuilder
   if (packageVersion("RGtk2") == "2.20.31")
-  { 
+  {
     if (missing(useGtkBuilder))
     {
       op <- options(warn=-1)
@@ -324,7 +324,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
       res <- g$addFromString('<interface><requires/></interface>', 20)
       res <- g$addFromString('<requires/>', 20)
       options(op)
-      
+
       if (! res$retval && res$error$message[1] == "Unhandled tag: 'requires'")
         crv$useGtkBuilder <- FALSE
       else if (.Platform$OS.type=="windows" && version$major<="2" && version$minor<"12")
@@ -341,7 +341,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     #GtkBuilder.
     crv$useGtkBuilder <- TRUE
   }
-  
+
   # Check to make sure libglade is available.
 
   if (! crv$useGtkBuilder)
@@ -358,7 +358,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
   # 130412 Remove for now????
   if (isMac())
     fixMacAndGtkBuilderTypes()
- 
+
   # Ensure the About dialog will respond to the Quit button.
 
   #on_aboutdialog_response <<- gtkWidgetDestroy
@@ -383,7 +383,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     crv$rattleGUI <- RGtk2::gtkBuilderNew()
     crv$rattleGUI$setTranslationDomain("R-rattle")
   }
-  
+
   result <- try(etc <- file.path(path.package(package="rattle")[1], "etc"),
                 silent=TRUE)
   if (inherits(result, "try-error"))
@@ -406,9 +406,9 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     # should be able to test this programatically in .onAttach and
     # then set crv$useGtkBuilder to FALSE in that case so we don't get
     # here.
-    
+
     crv$rattleGUI$getObject("rattle_window")$show()
-  
+
   # Really need an second untouched crv$rattleGUI
 
   #121212 DO WE NEED THIS NOW? Global_.rattleGUI <-crv$rattleGUI
@@ -420,7 +420,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
   # fixed.
 
   if (crv$useGtkBuilder) fixGtkBuilderAdjustments()
-  
+
   # 090206 Tune the interface to suit needs, and in particular allow
   # packages to overwrite these functions so that the interface can be
   # tuned to suit plugins.
@@ -430,12 +430,12 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
   setDefaultsGUI()
   # 101008 Show toolbar text under the icons, if option is set.
   if (crv$toolbar.text) theWidget("toolbar")$setStyle("GTK_TOOLBAR_BOTH")
-  
+
   # 100120 A temporary fix for MS/Windows where translations of stock
   # items by RGtk2 don't seem to be happening. It works just fine for
   # GNU/Linux. We probably only want to do this if we have a foreign
   # locale.
-  
+
   if (isWindows())
   {
     fixTranslations()
@@ -509,7 +509,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
                      "You can load it through the Data tab."))
     dataset <- NULL
   }
-  
+
   if (is.null(csvname) && is.null(dataset))
   {
     # Use the .Rattle settings first, but these might be overriden if
@@ -612,7 +612,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
                   weight = 8, comment = 9)
   crv$COLUMNstart <- crv$COLUMN[["input"]]
   crv$COLUMNend <- crv$COLUMN[["weight"]]
-  
+
   crv$IMPUTE <- c(number=0, variable=1, comment=2)
 
   crv$CATEGORICAL <- c(number = 0, variable = 1, barplot = 2,
@@ -767,11 +767,11 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     #   rattle:::Rtxt("Data")
     # It appears the UTF is being interpreted as Shift-JIS
     # So hardcode these (perhaps a growing list)
-    
+
     crv$DATA.DISPLAY.TREEVIEW.TAB <- 0
     crv$DATA.DISPLAY.WELCOME.TAB  <- 1
   }
-  
+
 
   # Define the TRANSFORM tab pages
 
@@ -889,7 +889,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 
   # 2022-08-30 Ciaro device has been archived by CRAN so by default
   # ensure it is turned off in settings.
-  
+
   ## if (! packageIsAvailable("cairoDevice", Rtxt("enable the cairo device option")))
   ## {
     theWidget("use_cairo_graphics_device")$setActive(FALSE)
@@ -952,7 +952,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
   if (not.null(dataset))
   {
     theWidget("data_rdataset_radiobutton")$setActive(TRUE)
-    
+
     # 110531 TODO Get list of available data frames from the combobox,
     # choose the right one, and then Execute. How to get the list of
     # current values in the combobox? Instead, for now do the same
@@ -976,7 +976,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     # Make sure GUI updates
     while (RGtk2::gtkEventsPending()) RGtk2::gtkMainIterationDo(blocking=FALSE)
     executeDataTab()
-  }      
+  }
   else if (not.null(csvname))
   {
     if (!theWidget("data_filechooserbutton")$setUri(csvname))
@@ -1078,10 +1078,10 @@ configureGUI <- function()
   ## connectr.icon <- RGtk2::gtkImageNewFromPixbuf(connectr.pixbuf)
   ## connectr.button <- theWidget("connectr_toolbutton")
   ## RGtk2::gtkToolButtonSetIconWidget(connectr.button, connectr.icon)
-  
+
   # 101202 Remove the By Group button and instead if a rescale has a
   # categoric selected then do by group. TODO.
-  
+
   # theWidget("normalise_interval_radiobutton")$hide()
 
 
@@ -1095,10 +1095,10 @@ configureGUI <- function()
   # Warning message:
   # 'method' is deprecated.
   # Use 'gtkWindowSetResizable' instead.
-  # See help("Deprecated") and help("RGtk2-deprecated"). 
+  # See help("Deprecated") and help("RGtk2-deprecated").
   #
   # setResizable(TRUE) is the default but we stillget this problem.
-  
+
    suppressWarnings(crv$rattleGUI$getObject("rattle_window")$setPolicy(TRUE, TRUE, TRUE))
 
 }
@@ -1107,14 +1107,14 @@ setDefaultsGUI <- function()
 {
   # 100315 Handle CSV defaults typical in Europe, as suggested by
   # Denis Brion.
-  
+
   decimal <- Sys.localeconv()["decimal_point"]
   if (decimal == ",")
   {
     theWidget("data_separator_entry")$setText(";")
     theWidget("data_decimal_entry")$setText(",")
   }
-}  
+}
 
 fixMacAndGtkBuilderTypes <- function()
 {
@@ -1123,7 +1123,7 @@ fixMacAndGtkBuilderTypes <- function()
   # GtkBulder stuff added 100821 on the move from libglade2. Note that
   # it may not be needed for Mac (Sys.info()["sysname"] == "Darwin")
   # any more.
-  
+
   # Use the following to extract all widgets from the glade file:
   #
   # $ grep '<widget' rattle.glade | sed 's|^.*widget class="||' |\
@@ -1182,32 +1182,32 @@ fixGtkBuilderAdjustments <- function()
   nad <- RGtk2::gtkAdjustmentNew(NULL, NULL, 100000000, 1, 100, 0)
   wid$setAdjustment(nad)
   wid$setValue(42)
-  
+
   wid <- theWidget("data_odbc_limit_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100000000, 1, 100, 0)
   wid$setAdjustment(nad)
   wid$setValue(0)
-  
+
   wid <- theWidget("sample_percentage_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(70)
-  
+
   wid <- theWidget("sample_count_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(0)
-  
+
   wid <- theWidget("plots_per_page_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 9, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(4)
-  
+
   wid <- theWidget("benford_digits_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 9, 1, 2, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("normalise_interval_numgroups_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100000, 1, 10, 0)
   wid$setAdjustment(nad)
@@ -1217,122 +1217,122 @@ fixGtkBuilderAdjustments <- function()
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(4)
-  
+
   wid <- theWidget("kmeans_clusters_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 2, 100000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(10)
-  
+
   wid <- theWidget("kmeans_seed_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(42)
-  
+
   wid <- theWidget("kmeans_runs_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 1000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("hclust_nbproc_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 100, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("hclust_clusters_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 2, 100000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(10)
-  
+
   wid <- theWidget("associate_support_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 1, 0.01, 0.1, 0)
   wid$setAdjustment(nad)
   wid$setValue(0.1)
-  
+
   wid <- theWidget("associate_confidence_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 1, 0.01, 0.1, 0)
   wid$setAdjustment(nad)
   wid$setValue(0.1)
-  
+
   wid <- theWidget("associate_lift_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100, 0.1, 0.5, 0)
   wid$setAdjustment(nad)
   wid$setValue(1.5)
-  
+
   wid <- theWidget("rpart_minsplit_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(20)
-  
+
   wid <- theWidget("rpart_minbucket_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 1000000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(7)
-  
+
   wid <- theWidget("rpart_maxdepth_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 30, 1, 5, 0)
   wid$setAdjustment(nad)
   wid$setValue(20)
-  
+
   wid <- theWidget("model_tree_cp_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0.00001, 1, 0.0001, 0.001, 0)
   wid$setAdjustment(nad)
   wid$setValue(0.01)
-  
+
   wid <- theWidget("ada_ntree_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 10000, 10, 50, 0)
   wid$setAdjustment(nad)
   wid$setValue(50)
-  
+
   wid <- theWidget("ada_maxdepth_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 30, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(30)
-  
+
   wid <- theWidget("ada_minsplit_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 10000000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(20)
-  
+
   wid <- theWidget("ada_cp_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, -1, 1, 0.00001, 0.001, 0)
   wid$setAdjustment(nad)
   wid$setValue(0.01)
-  
+
   wid <- theWidget("ada_xval_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 100, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(10)
-  
+
   wid <- theWidget("ada_draw_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 1000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("rf_ntree_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 10000, 10, 50, 0)
   wid$setAdjustment(nad)
   wid$setValue(500)
-  
+
   wid <- theWidget("rf_mtry_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 1000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(10)
-  
+
   wid <- theWidget("rf_print_tree_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 1000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("svm_poly_degree_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 1, 10, 1, 2, 0)
   wid$setAdjustment(nad)
   wid$setValue(1)
-  
+
   wid <- theWidget("nnet_hidden_nodes_spinbutton")
   nad <- RGtk2::gtkAdjustmentNew(NULL, 0, 10000, 1, 10, 0)
   wid$setAdjustment(nad)
   wid$setValue(10)
-}  
+}
 
 fixTranslations <- function(w=theWidget("rattle_window"))
 {
@@ -1340,9 +1340,9 @@ fixTranslations <- function(w=theWidget("rattle_window"))
   # needed for MS/Windows R 2.12.0 for some reason. 101127 But now the
   # children widgets are not getting translated! I guess previously
   # getName() rutnerned an empty string, but is now returning NULL.
-  
+
   ## if (! length(w$getName())) return()
-  
+
   # Ignore these since they are already translated and we end up with
   # a corrupted string passing through to Rtxt again. generally they
   # are Stock Items.
@@ -1360,7 +1360,7 @@ fixTranslations <- function(w=theWidget("rattle_window"))
   # 100410 The following should be translated, unless we are in RStat
   # where they are named Regression rather than Linear, or are not
   # used, or otherwise differently handled.
-  
+
   if (crv$appname == "RStat" && length(w$getName()) && w$getName() %in%
       c("data_sample_checkbutton",
         "data_script_radiobutton",
@@ -1368,7 +1368,7 @@ fixTranslations <- function(w=theWidget("rattle_window"))
         "glm_linear_radiobutton",
         "evaluate_glm_checkbutton"))
     return()
-  
+
   if ("GtkLabel" %in% class(w))
     w$setLabel(Rtxt(w$getLabel()))
   else if ("GtkNotebook" %in% class(w))
@@ -1379,7 +1379,7 @@ fixTranslations <- function(w=theWidget("rattle_window"))
   #  if ("GtkLabel" %in% class(w)) w$setLabel("Fred")
   if ("GtkContainer" %in% class(w))
     lapply(RGtk2::gtkChildren(w), fixTranslations)
-  
+
   return()
 }
 
@@ -1387,7 +1387,7 @@ translateMenus <- function()
 {
   # 100328 The menus were not getting fixed, since we need to
   # specifically traverse them it seems.
-  
+
   menus <- c("tools_menu", "settings_menu", "help_menu",
              "help_data_menu", "help_explore_menu", "help_test_menu",
              "help_transform_menu", "help_transform_rescale_menu",
@@ -1407,7 +1407,7 @@ translateComboBoxes <- function()
               "explore_correlation_method_combobox",
               "svm_kernel_combobox", "hclust_distance_combobox",
               "hclust_link_combobox")
-  
+
   printNode <- function(model, path, iter, data)
     {vals <<- c(vals, model$getValue(iter, 0)$value); integer(1)}
   for (cb in combos)
@@ -1416,16 +1416,16 @@ translateComboBoxes <- function()
     # to Rtxt value.
 
     # Get the actual object.
-    
+
     cbw <- theWidget(cb)
 
     # Retrieve the current entries for the combobox.
-    
+
     vals <- NULL
     cbw$getModel()$foreach(printNode)
 
     # Clear the current entries
-    
+
     cbw$getModel()$clear()
 
     # Add the translated entries. Note that for entries defined in
@@ -1433,11 +1433,11 @@ translateComboBoxes <- function()
     # the entries concatenated, with "\n" separating them. So we need
     # to reconstructt this string, translate, then split, then
     # appendText for each one.
-    
+
     sapply(strsplit(RtxtNT(paste(vals, collapse="\n")), "\n")[[1]], cbw$appendText)
 
     # Reset default choice. Assume to be 0.
-    
+
     cbw$setActive(0)
   }
 }
@@ -1637,7 +1637,7 @@ resetRattle <- function(new.dataset=TRUE)
   }
 
   if (crv$mrs) theWidget("data_xdf_checkbutton")$show()
-  
+
   # 080520 Don't turn these off - it makes sense to allow the user to
   # set these options even before the dataset is loaded.
 
@@ -1669,7 +1669,7 @@ resetRattle <- function(new.dataset=TRUE)
     # Data -> Corpus
 
     theWidget("data_corpus_location_filechooserbutton")$setCurrentFolder(getwd())
-    
+
     # Reset Test
 
     theWidget("test_distr_radiobutton")$setActive(TRUE)
@@ -1825,7 +1825,7 @@ resetRattle <- function(new.dataset=TRUE)
   theWidget("hclust_data_plot_button")$setSensitive(FALSE)
   theWidget("hclust_discriminant_plot_button")$setSensitive(FALSE)
   if (! isMac()) theWidget("associate_sort_comboboxtext")$setActive(0)
-  
+
   setStatusBar(Rtxt("To Begin: Choose the data source,",
                     "specify the details,",
                     "then click the Execute button."))
@@ -1891,7 +1891,7 @@ errorDialog <- function(...)
   # actually remain active. At times this is useful as the error
   # dialogue contains instructions on "fixing" the error and you can
   # keep the dialogue visible whilst fixing the error.
-  
+
   dialog <- RGtk2::gtkMessageDialogNew(NULL, "destroy-with-parent", "error", "close",
                                 ...,
                                 sprintf("\n\n%s %s",
@@ -1985,7 +1985,7 @@ variablesHaveChanged <- function(action)
 # package using system.file().
 
 package.installed <- function(package) nchar(system.file(package=package)) > 0
-  
+
 packageIsAvailable <- function(pkg, msg=NULL, use.git=FALSE, alt.msg=NULL)
 {
   # 160904 XDF TODO Add new arguments use.git and alt.msg. The package
@@ -1994,7 +1994,7 @@ packageIsAvailable <- function(pkg, msg=NULL, use.git=FALSE, alt.msg=NULL)
   # installing the package. The package RevoScaleR is not readily
   # available and so we need to have an alternative message to say
   # that this needs to be obtained from Microsoft.
-  
+
   appname <- ifelse(exists("crv") && ! is.null(crv$appname), crv$appname, "Rattle")
   localmsg <- sprintf(Rtxt("The package '%s' is required to %s.",
                            "It does not appear to be installed.",
@@ -2131,7 +2131,7 @@ reportTimeTaken <- function(tv, time.taken, model, msg)
   # Rtxt("secs") Rtxt("mins") So that the above units gets
   # translated. Note also the gap after Rtxt above to avoid it being
   # picked up as a string to be translated.
-  
+
   addTextview(tv, "\n", time.msg, textviewSeparator())
   appendLog(time.msg)
 
@@ -2211,7 +2211,7 @@ getNotebookPageLabel <- function(nb, page)
 {
   # Given a notebook object and a numeric page (from 0 to npages-1),
   # return the label on the tab for that page.
-  
+
   # 100301 Japanese on MS/Windows returns what might be a Shift-JIS
   # string from nb$getTabLabelText(nb$getNthPage(nb$getCurrentPage()))
   # rather than UTF-8, and so the tab name comparisons fail. For now
@@ -2223,7 +2223,7 @@ getNotebookPageLabel <- function(nb, page)
   # UTF-8 rather than "unknown". That seems to fix the problem.
 
   # TODO - Remove the commented code.
-  
+
   ## if (! isJapanese()) # Test this first to avoid too much testing otherwise.
     label <- nb$getTabLabelText(nb$getNthPage(page))
     Encoding(label) <- "UTF-8"
@@ -2282,7 +2282,7 @@ getNotebookPageLabel <- function(nb, page)
   ## else
   ##   # Fall through to the default.
   ##   label <- nb$getTabLabelText(nb$getNthPage(page))
-  
+
   return(label)
 }
 
@@ -2306,7 +2306,7 @@ isMac <- function()
 {
   # 140307 Added to check for GUI tings not migrated back into the Mac
   # GUI XML.
-    
+
   # Perhaps should use .Platform$OS.type as below for isWindows.
   return(Sys.info()["sysname"] == "Darwin")
 }
@@ -2404,11 +2404,11 @@ on_plot_close_button_clicked <- function(action)
   dev.off(dn)
 
   pw <- action$getParentWindow()
-  
+
   # 100830 "destroy" causes R to crash. So try hide - but does that
   # not release the object and hence accumulates memory usage. Does
   # withdraw do any better?
-  
+
   # pw$destroy()
   # pw$hide()
   pw$withdraw()
@@ -2424,7 +2424,7 @@ dev.num <- function(title)
   Encoding(title) <- "UTF-8"
   return(as.integer(sub(".* ", "", title)))
 }
-  
+
 
 ########################################################################
 
@@ -2475,19 +2475,19 @@ newPlot <- function(pcnt=1)
         gladeXMLSignalAutoconnect(plotGUI)
         da <- plotGUI$getWidget("drawingarea")
       }
-      
+
       cairoDevice::asCairoDevice(da)
       if (isJapanese())
       {
         # 091222 Use a font that MS/Windows can display Japanese
         # characters. Would like to use opar to record old value, but
         # not easy to know where the end of this scope is.
-        
+
         fnt.cmd <- 'par(family=windowsFont("MS Gothic"))'
         appendLog(Rtxt("Use a Japanese font for the plots."), fnt.cmd)
         eval(parse(text=fnt.cmd))
       }
-      
+
       if (crv$useGtkBuilder)
         plotGUI$getObject("plot_window")$setTitle(paste(crv$appname, ": ",
                                                         Rtxt("Plot"), " ",
@@ -2718,7 +2718,7 @@ genPlotTitleCmd <- function(..., vector=FALSE)
                      crv$appname)
     else
       sub <- sprintf('paste("%s")', sprintf(Rtxt("Generated by %s"), crv$appname))
-    
+
     return(sprintf('title(main="%s",\n    sub=%s)', main, sub))
   }
 }
@@ -2749,7 +2749,7 @@ set.cursor <- function(cursor="left-ptr", message=NULL)
   # test if it works okay on Linux/Windows/Mac for textviews, but on
   # Mac at least, some textviews were not changing cursor. I should test
   # if theWdiget(tv) is NULL then don't proceed.
-  
+
   for (tv in allTextviews())
   {
     win <- theWidget(tv)$getWindow("GTK_TEXT_WINDOW_TEXT")
@@ -2942,7 +2942,7 @@ on_about_menu_activate <-  function(action, window)
     about <<- RGtk2::gtkBuilderNew()
     about$setTranslationDomain("R-rattle")
   }
-  
+
   if (inherits(result, "try-error"))
     if (crv$useGtkBuilder)
       about$addFromFile(crv$rattleUI)
@@ -2980,7 +2980,7 @@ configureAbout <- function(ab)
   ab["program-name"] <- "Rattle"
   ab$setCopyright(paste(DATE, "\n\n", COPYRIGHT, "\n" ,
                         Rtxt("All rights reserved.")))
-  
+
 #XX#  ab$setLicense(paste("This program (Rattle) is copyright software, owned by Togaware Pty Ltd.",
 #XX#                      "\n\nThis program is licensed and distributed by Togaware Pty Ltd",
 #XX#                      "\nto XLICENSEEX for up to XNUSERSX users until XEXPIREX.",
