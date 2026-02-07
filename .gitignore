@@ -1,0 +1,5 @@
+BACKUP
+repository/PACKAGES*
+repository/rattle_*
+inst/etc/rattle.ui.*
+*~
