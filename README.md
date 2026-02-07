@@ -11,7 +11,7 @@ interface are captured as an R script that can be readily executed in
 R independently of the Rattle interface.
 
 Rattle is Free (as in Libre) Open Source Software and the source code
-is available on Bitbucket. We give you the freedom to review the
+is available on Github. We give you the freedom to review the
 code, use it for whatever purpose you like, and to extend it however
 you like, without restriction, except that if you then distribute your
 changes you also need to distribute your source code too.
@@ -88,7 +88,7 @@ Be sure to include the output of:
 ```
 
 Issues can be sent to support@togaware.com or else raised as on issue
-on bitbucket (https://bitbucket.org/kayontoga/rattle).
+on github (https://github.com/gjwgit/rattlev5).
 
 References
 ==========
