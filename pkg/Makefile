@@ -39,6 +39,8 @@ rattle:
   check         Run a local check.
   ucheck        Submit to the R check before submitting to CRAN.
 
+  cran          Show the cran details for the pacakge.
+
   www		Update the rattle website on togware with version.
   weather       Update weather datasets for the package.
 
@@ -105,9 +107,12 @@ ucheck: $(APP)_$(VER).tar.gz
 	@echo Wait for email from Uwe Legge.
 
 .PHONY: cran
-cran: $(APP)_$(VER).tar.gz
-	sh ./upload_cran.sh
-	@echo Be sure to email cran@r-project.org.
+cran:
+	@echo "========================================================================"
+	@R --quiet -e 'foghorn::summary_cran_details(pkg="rattle")'
+	@echo "========================================================================"
+	@R --quiet -e 'foghorn::summary_cran_results(pkg="rattle")'
+	@echo "========================================================================"
 
 .PHONY: src
 src: $(APP)_$(VER)_src.zip  $(APP)_$(VER)_src.tar.gz
