@@ -10,7 +10,7 @@
   extensively building on the excellent collection of R packages by very
   many authors for data manipulation, exploration, analysis, and
   evaluation. If you have RGtk2 installed then this function will still
-  be useful. Otherwise visit https://rattle.togaware.com for a modern
+  be useful. Otherwise visithttps://togaware.com/projects/rattle// for a modern
   re-implementation of the rattle UI utilising much of the same
   underlying R code for the data analyses.
 
@@ -55,7 +55,7 @@ rattle(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
 
 }
 
-\references{Package home page: \url{https://rattle.togaware.com}}
+\references{Package home page: \url{https://togaware.com/projects/rattle/}}
 
 \author{\email{Graham.Williams@togaware.com}}
 

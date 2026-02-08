@@ -70,7 +70,7 @@ graphical user interface to very many other R packages that provide
 functionality for data science, data mining, machine learning and AI.
 
 This quick start guide is under development. See
-\url{https://rattle.togaware.com} for extensive documentation
+\url{https://togaware.com/projects/rattle/} for extensive documentation
 
 \section{Requirements}
 
@@ -78,7 +78,7 @@ This quick start guide is under development. See
 software applications/libraries that are independent of R. Rattle V6
 implements the user interface using the Flutter cross platform
 framework. Operating system specific installation instructions are
-available from \url{https://rattle.togaware.com/}.
+available from \url{https://togaware.com/projects/rattle}.
 
 Only a couple of R packages are dependencies for \Rattle. Most are
 suggestions, but without them functionality is quite limited. You
@@ -110,8 +110,8 @@ The packages will usually be installed with the following command:
 install.packages("rattle", dependencies=c("Depends", "Suggests"))
 @
 
-The latest beta version of rattle is available from
-\url{https://rattle.togaware.com/}:
+The latest version of rattle is available from
+\url{https://togaware.com/projects/rattle/}:
 
 <<install_togaware, eval=FALSE>>=
 install.packages("rattle", repos="https://rattle.togaware.com", type="source")
@@ -154,11 +154,11 @@ This will rerun everything that was done in the GUI session but purely as a scri
 \begin{description}
 \item Williams, G. J. (2009). {\em Rattle: A Data Mining GUI for R}.
   The R Journal, 1(2), 45-55. URL:
-  \href{https://journal.r-project.org/archive/2009-2/RJournal_2009-2_Williams.pdf}
-  {https://journal.r-project.org/archive/2009-2/RJournal\_2009-2\_Williams.pdf}.
+  \href{https://journal.r-project.org/news/RJ-2009-2-RJournal_2009-2_Williams/RJ-2009-2-RJournal_2009-2_Williams.pdf}
+  {https://journal.r-project.org/news/RJ-2009-2-RJournal_2009-2\_Williams/RJ-2009-2-RJournal_2009-2\_Williams.pdf}.
 \item Williams, G. J. (2011). {\em Data Mining with Rattle and R: The
     Art of Excavating Data for Knowledge Discovery}. Use R!
-  series. Springer. \href{https://bit.ly/rattle_data_mining}{https://bit.ly/rattle\_data\_mining}.
+  series. Springer.
 \end{description}
 
 \end{document}

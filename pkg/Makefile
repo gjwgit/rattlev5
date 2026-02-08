@@ -9,7 +9,7 @@
 ########################################################################
 
 APP=rattle
-VER=5.5.3
+VER=5.6.1
 
 INC_BASE    = $(HOME)/.local/share/make
 INC_CLEAN   = $(INC_BASE)/clean.mk
