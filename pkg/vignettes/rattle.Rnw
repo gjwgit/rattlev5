@@ -1,0 +1,164 @@
+% \VignetteIndexEntry{Rattle Quick Start Guide}
+% \VignetteDepends{rattle}
+% \VignetteKeywords{data mining}
+% \VignettePackage{rattle}
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage[pdftex]{graphicx}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{algorithm2e}
+\usepackage[
+         colorlinks=true,
+         linkcolor=blue,
+         citecolor=blue,
+         urlcolor=blue]
+         {hyperref}
+\usepackage{Sweave}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% define new colors for use
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{darkred}{rgb}{0.6,0.0,0}
+\definecolor{lightbrown}{rgb}{1,0.9,0.8}
+\definecolor{brown}{rgb}{0.6,0.3,0.3}
+\definecolor{darkblue}{rgb}{0,0,0.8}
+\definecolor{darkmagenta}{rgb}{0.5,0,0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rattle}{\textsf{Rattle}\xspace}
+\newcommand{\pkg}[1]{{\tt #1}\xspace}
+
+\setlength{\oddsidemargin}{-.25 truein}
+\setlength{\evensidemargin}{0truein}
+\setlength{\topmargin}{-0.2truein}
+\setlength{\textwidth}{7 truein}
+\setlength{\textheight}{8.5 truein}
+\setlength{\parindent}{0.20truein}
+\setlength{\parskip}{0.10truein}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\lhead{}
+\chead{Rattle}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{The Rattle Package: Quick Start Guide}
+\author{Graham Williams \\ Graham.Williams@togaware.com}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\section{Introduction}
+
+\Rattle (Williams, 2011) is a package written in R providing a
+graphical user interface to very many other R packages that provide
+functionality for data science, data mining, machine learning and AI.
+
+This quick start guide is under development. See
+\url{https://rattle.togaware.com} for extensive documentation
+
+\section{Requirements}
+
+\Rattle depends on over 40 other R packages and a couple of other
+software applications/libraries that are independent of R. Rattle V6
+implements the user interface using the Flutter cross platform
+framework. Operating system specific installation instructions are
+available from \url{https://rattle.togaware.com/}.
+
+Only a couple of R packages are dependencies for \Rattle. Most are
+suggestions, but without them functionality is quite limited. You
+might like to install the following pacakges:
+\href{https://cran.r-project.org/package=ada}{\pkg{ada}},
+\href{https://cran.r-project.org/package=arules}{\pkg{arules}},
+\href{https://cran.r-project.org/package=doBy}{\pkg{doBy}},
+\href{https://cran.r-project.org/package=ellipse}{\pkg{ellipse}},
+\href{https://cran.r-project.org/package=fBasics}{\pkg{fBasics}},
+\href{https://cran.r-project.org/package=fpc}{\pkg{fpc}},
+\href{https://cran.r-project.org/package=gplots}{\pkg{gplots}},
+\href{https://cran.r-project.org/package=Hmisc}{\pkg{Hmisc}},
+\href{https://cran.r-project.org/package=kernlab}{\pkg{kernlab}},
+\href{https://cran.r-project.org/package=mice}{\pkg{mice}},
+\href{https://cran.r-project.org/package=party}{\pkg{party}},
+\href{https://cran.r-project.org/package=playwith}{\pkg{playwith}},
+\href{https://cran.r-project.org/package=pmml}{\pkg{pmml}},
+\href{https://cran.r-project.org/package=randomForest}{\pkg{randomForest}},
+\href{https://cran.r-project.org/package=reshape}{\pkg{reshape}},
+\href{https://cran.r-project.org/package=rggobi}{\pkg{rggobi}},
+\href{https://cran.r-project.org/package=RGtk2}{\pkg{RGtk2}},
+\href{https://cran.r-project.org/package=ROCR}{\pkg{ROCR}},
+\href{https://cran.r-project.org/package=RODBC}{\pkg{RODBC}}, and
+\href{https://cran.r-project.org/package=rpart}{\pkg{rpart}}.
+
+The packages will usually be installed with the following command:
+
+<<install, eval=FALSE>>=
+install.packages("rattle", dependencies=c("Depends", "Suggests"))
+@
+
+The latest beta version of rattle is available from
+\url{https://rattle.togaware.com/}:
+
+<<install_togaware, eval=FALSE>>=
+install.packages("rattle", repos="https://rattle.togaware.com", type="source")
+@
+
+\section{First Steps}
+
+Start up rattle from the Rattle icon or else in a terminal at the OS
+command prompt type `rattle`.
+
+\section{Simple Scenario: Build a Couple of Models}
+
+\begin{enumerate}
+\item Tap Dataset
+\item Tap Weather (to load the sample weather dataset)
+\item Tap the Model function
+\item Tap the Tree feature
+\item Tap the Build Decision Tree button
+\item Tap the Right Arrow to display the decision tree
+\item Tap the Forest feature
+\item Tap the Build Random Forest button
+\item Tap the Evaluate function
+\item Tap the Evaluate button
+\item Tap the Right Arrown to display the performance plots and measures
+\item Tap the Script feature
+\item Tap the Save button to save the script to the file script\_weather.R
+\end{enumerate}
+
+Now separately start up R from a terminal and type (matching the
+filename as saved).
+
+<<eval=FALSE>>=
+source("~/script_weather.R")
+@
+
+This will rerun everything that was done in the GUI session but purely as a script.
+
+\section{References}
+
+\begin{description}
+\item Williams, G. J. (2009). {\em Rattle: A Data Mining GUI for R}.
+  The R Journal, 1(2), 45-55. URL:
+  \href{https://journal.r-project.org/archive/2009-2/RJournal_2009-2_Williams.pdf}
+  {https://journal.r-project.org/archive/2009-2/RJournal\_2009-2\_Williams.pdf}.
+\item Williams, G. J. (2011). {\em Data Mining with Rattle and R: The
+    Art of Excavating Data for Knowledge Discovery}. Use R!
+  series. Springer. \href{https://bit.ly/rattle_data_mining}{https://bit.ly/rattle\_data\_mining}.
+\end{description}
+
+\end{document}

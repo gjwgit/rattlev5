@@ -1,8 +1,7 @@
 Package: rattle
-Type: Package
-Title: Graphical User Interface for Data Science in R
 Version: 5.5.3
-Date: 2026-02-07
+Date: 2026-02-08
+Title: Data Science in R supporting the Rattle UI
 Authors@R: c(person("Graham", "Williams",
 	   	    role=c("aut", "cph", "cre"),
 	            email="Graham.Williams@togaware.com"),
@@ -29,36 +28,36 @@ Authors@R: c(person("Graham", "Williams",
 	            comment="initial xgboost"),
              person("Cameron", "Chisholm", role="ctb",
 	            comment="risk plot on risk chart"))
+Author: Graham Williams [aut, cph, cre]
+Maintainer: Graham WIlliams <Graham.Williams@togaware.com>
 Depends: R (>= 3.5.0), tibble, bitops
-Imports: stats, utils, ggplot2, grDevices, graphics, jsonlite, lubridate, magrittr, methods,
-  stringi, stringr, tidyr, dplyr, XML, rpart.plot
-Suggests: pmml (>= 1.2.13), colorspace,
-  ada, amap, arules, arulesViz, biclust,
-  cba, cluster, corrplot, descr, doBy,
+Imports: stats, utils, ggplot2, grDevices, graphics, jsonlite, lubridate,
+  magrittr, methods, stringi, stringr, tidyr, dplyr, XML, rpart.plot
+Suggests: ada, amap, arules, arulesViz, biclust,
+  cba, cluster, colorspace, corrplot, descr, doBy,
   e1071, ellipse, fBasics, foreign, fpc,
   gdata, ggdendro, gplots, grid,
   gridExtra, gtools,
   Hmisc, janitor, kernlab, Matrix, mice,
   nnet, party, plyr, psych,
   randomForest, RColorBrewer, readxl, reshape,
-  ROCR, RODBC, rpart, scales,
-  SnowballC, survival, timeDate, tm,
-  xgboost
+  ROCR, rpart, scales,
+  SnowballC, survival, tidyselect, timeDate, tm, xgboost
 Description: The R Analytic Tool To Learn Easily (Rattle) provides a
-  collection of utilities functions for the data scientist. A
-  Gnome (RGtk2) based graphical interface is included with
+  collection of utilities functions for the data scientist. This
+  package supports the companion graphical interface with
   the aim to provide a simple and intuitive introduction to R
   for data science, allowing a user to quickly load data from a CSV file
-  (or via ODBC), transform and explore the data,
-  build and evaluate models, and export models as PMML (predictive
-  modelling markup language) or as scores. A key aspect of the GUI
-  is that all R commands are logged and commented through the log tab.
+  transform and explore the data, and to build and evaluate models.
+  A key aspect of the GUI is that all R commands are logged and
+  commented through the log tab.
   This can be saved as a standalone R script file and as
   an aid for the user to
   learn R or to copy-and-paste directly into R itself.
-  Note that RGtk2 and cairoDevice have been archived on CRAN.
-  See <https://rattle.togaware.com> for installation instructions.
+  See <https://rattle.togaware.com> for instructions on installing
+  the graphuical user interface comonent of Rattle.
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
+LazyDataCompression: gzip
 URL: https://rattle.togaware.com/

@@ -2,7 +2,7 @@
 #
 # BASE FUNCTIONS
 #
-# Time-stamp: <Sunday 2026-01-18 13:39:43 +1100 Graham Williams>
+# Time-stamp: <Sunday 2026-02-08 14:21:56 +1100 Graham Williams>
 #
 # Copyright (c) 2009-2023 Togaware Pty Ltd
 #
@@ -83,7 +83,7 @@ Rtxt <- function(...)
 RtxtNT <- Rtxt
 
 VERSION <- "5.5.3"
-DATE <- "2026-01-28"
+DATE <- "2026-02-08"
 
 # 091223 Rtxt does not work until the rattle GUI has started, perhaps?
 COPYRIGHT <- paste(Rtxt("Copyright"), "(C) 2006-2026 Togaware Pty Ltd.")
@@ -499,7 +499,7 @@ rattle <- function(csvname=NULL, dataset=NULL, useGtkBuilder=TRUE)
     dataset <- NULL
   }
 
-  if (!missing(dataset) && class(dataset) != "character")
+  if (!missing(dataset) && !inherits(dataset, "character"))
   {
     errorDialog(Rtxt("An actual dataset rather than the name of the",
                      "dataset has been supplied as the argument to",
@@ -2476,7 +2476,8 @@ newPlot <- function(pcnt=1)
         da <- plotGUI$getWidget("drawingarea")
       }
 
-      cairoDevice::asCairoDevice(da)
+      # 20260208 gjw No longer available
+      # cairoDevice::asCairoDevice(da)
       if (isJapanese())
       {
         # 091222 Use a font that MS/Windows can display Japanese
@@ -2653,7 +2654,9 @@ savePlotToFile <- function(file.name, dev.num=dev.cur())
     #if (isJapanese())
     #  dev.copy(pdf, file=file.name, width=10, height=10, version="1.4", family="Japan1")
     #else
-    dev.copy(cairoDevice::Cairo_pdf, file=file.name, width=10, height=10)
+    # 20260208 gjw cairoDevice no longer available
+    # dev.copy(cairoDevice::Cairo_pdf, file=file.name, width=10, height=10)
+    dev.copy(pdf, file=file.name, width=10, height=10, version="1.4")
   else if (ext == "png")
     dev.copy(png, file=file.name, width=1000, height=1000)
   else if (ext == "jpg")

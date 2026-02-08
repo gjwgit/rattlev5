@@ -1,5 +1,5 @@
 \name{meta_data}
-\alias{meta_Data}
+\alias{meta_data}
 \title{
   Calculate the dataset meta data for use by the Rattle V6 UI.
 }

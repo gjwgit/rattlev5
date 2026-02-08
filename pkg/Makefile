@@ -9,7 +9,7 @@
 ########################################################################
 
 APP=rattle
-VER=5.5.2
+VER=5.5.3
 
 INC_BASE    = $(HOME)/.local/share/make
 INC_CLEAN   = $(INC_BASE)/clean.mk
@@ -179,7 +179,7 @@ repo: build zip
 	rsync -ahv inst/NEWS togaware.com:apps/rattle/NEWS
 
 .PHONY: weather
-weather: 
+weather:
 	(cd $(WEATHER); make update)
 	rsync $(WEATHER)/weather.RData data/
 	rsync $(WEATHER)/weatherAUS.RData data/

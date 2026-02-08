@@ -63,11 +63,11 @@ meta_data <- function(df) {
 
 unique_columns <- function(tbl) {
   tbl %>%
-    dplyr::select(where(~ !is.numeric(.x) || all(.x == as.integer(.x), na.rm=TRUE))) ->
+    dplyr::select(tidyselect::where(~ !is.numeric(.x) || all(.x == as.integer(.x), na.rm=TRUE))) ->
   non_real_cols
 
   non_real_cols %>%
-    dplyr::select(where(~ dplyr::n_distinct(.x, na.rm=TRUE) == nrow(tbl))) %>%
+    dplyr::select(tidyselect::where(~ dplyr::n_distinct(.x, na.rm=TRUE) == nrow(tbl))) %>%
     colnames() ->
   unique_non_real_cols
 
@@ -113,20 +113,20 @@ rattlePalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
 ## 20260118 gjw MOVED TO R RATTLE PACKAGE
 
 theme_rattle <- function(base_size = 11, base_family = "") {
-  theme_grey(base_size = base_size, base_family = base_family) +
-    theme(
+  ggplot2::theme_grey(base_size = base_size, base_family = base_family) +
+    ggplot2::theme(
       # Customize text elements
-      plot.title = element_text(color = "darkblue",
+      plot.title = ggplot2::element_text(color = "darkblue",
                                 face = "bold",
                                 size = base_size * 1.2),
-      axis.title = element_text(color = "darkblue"),
-      axis.text = element_text(color = "darkblue"),
-      legend.title = element_text(color = "darkblue"),
-      legend.text = element_text(color = "darkblue"),
+      axis.title = ggplot2::element_text(color = "darkblue"),
+      axis.text = ggplot2::element_text(color = "darkblue"),
+      legend.title = ggplot2::element_text(color = "darkblue"),
+      legend.text = ggplot2::element_text(color = "darkblue"),
       # Customize panel background
-      panel.background = element_rect(fill = "white"),
+      panel.background = ggplot2::element_rect(fill = "white"),
       # Customize grid lines
-      panel.grid.major = element_line(color = "lightgrey"),
-      panel.grid.minor = element_line(color = "lightgrey", linetype = "dotted")
+      panel.grid.major = ggplot2::element_line(color = "lightgrey"),
+      panel.grid.minor = ggplot2::element_line(color = "lightgrey", linetype = "dotted")
     )
 }
