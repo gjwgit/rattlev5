@@ -9,7 +9,7 @@
 ########################################################################
 
 APP=rattle
-VER=5.6.1
+VER=5.6.2
 
 INC_BASE    = $(HOME)/.local/share/make
 INC_CLEAN   = $(INC_BASE)/clean.mk
@@ -101,7 +101,7 @@ $(APP)_$(VER).check: $(APP)_$(VER).tar.gz
 
 .PHONY: ucheck
 ucheck: $(APP)_$(VER).tar.gz
-	sh ./upload_uwe.sh
+	sh ../upload_uwe.sh
 	@echo Wait for email from Uwe Legge.
 
 .PHONY: cran

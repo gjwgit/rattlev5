@@ -1,6 +1,6 @@
 Package: rattle
-Version: 5.6.0
-Date: 2026-02-08
+Version: 5.6.2
+Date: 2026-02-09
 Title: R Data Science Supporting Rattle
 Authors@R: c(person("Graham", "Williams",
 	   	    role=c("aut", "cph", "cre"),
