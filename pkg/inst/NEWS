@@ -2,11 +2,19 @@ Please visit https://github.com/gjwgit/rattlev5/commits/ for the
 definitive list of changes. This NEWS file will only update major
 releases going forward.
 
-rattle 5.5.3 20260207 Graham.Williams@togaware.com
+rattle 5.6.4 20260210 Graham.Williams@togaware.com
+
+  * Remove all GUI elements
+
+  * Retain data and support functions for RattleV6
+
+rattle 5.6.3 20260209 Graham.Williams@togaware.com
 
   * Required CRAN lint fixes.
 
   * Add V6 support functions.
+
+  * Begin migrating away from the RGtk2 GUI
 
 rattle 5.3.6 20200501 Graham.Williams@togaware.com
 
