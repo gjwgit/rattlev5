@@ -1,18 +1,20 @@
-# R Data Scientist: Gtk interface to R for Data Science
+# R Data Scientist: Support tools for the Rattle app for Data Science and AI
 #
-# Time-stamp: <Sunday 2026-02-08 14:36:43 +1100 Graham Williams>
+# Time-stamp: <Tuesday 2026-02-10 08:41:00 +1100 Graham Williams>
 #
-# Copyright (c) 2009-2023 Togaware Pty Ltd
+# Copyright (c) 2009-2026 Togaware Pty Ltd
 
 # These could be in rattle.R
 
 crs <- new.env() # Current Rattle State
 crv <- new.env() # Current Rattle Variables
 
+# A default colour palette for rattle!
+
 rattlePalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
                    "#0072B2", "#D55E00", "#CC79A7", "#000000")
 
-rattlePalette <- "Set1"
+# rattlePalette <- "Set1"
 
 if (! exists("RATTLE.DATA")) RATTLE.DATA <- NULL
 if (! exists("RATTLE.SCORE.IN")) RATTLE.SCORE.IN <- NULL
@@ -24,26 +26,24 @@ on_aboutdialog_response <- function(object, ...)
 
 .onLoad <- function(libname, pkgname)
 {
-  # print("LOAD")
-
-  # 101009 This is called first when the package is loaded into the
-  # library as through the library or require commands. Note that a
-  # user may have saved a workspace into .RData, and that seems to
-  # note the dependency upon the rattle package, and so when R starts
-  # up and looks to load the .RData file, it first loads this
-  # package. Thus anything here is evaluated first, and then
-  # overridden by things from .RData. Thus, the creation of
-  # environments, which used to be in here, should be in .onAttach,
-  # which is called when the user explicitly loads the package.
+  # 20101009 gjw This is called first when the package is loaded into
+  # the library as through the library() or require() commands. Note
+  # that a user may have saved a workspace into .RData, and that seems
+  # to note the dependency upon the rattle package. When R starts up
+  # and looks to load the .RData file, it first loads this package.
+  # Anything here is evaluated first, and then overridden by things
+  # from .RData. The creation of environments, which used to be in
+  # here, should be in .onAttach, which is called when the user
+  # explicitly loads the package.
   #
-  # Thus, when no .RData exists, LOAD and ATTACH happen when there is
-  # a library(rattle). When there is an .RData, LOAD happens when R
+  # When no .RData exists, LOAD and ATTACH happen when there is a
+  # library(rattle). When there is an .RData, LOAD happens when R
   # starts up, followed by loading .RData, and ATTACH happens when
   # there is a library(rattle).
   #
-  # 080417 The R manual for .onLoad also says to use .onAttach for
-  # startup messages, which makes sense as we want to see them when
-  # the user loads the package, not when R (possibly on startup)
+  # 20080417 gjw The R manual for .onLoad also says to use .onAttach
+  # for startup messages, which makes sense as we want to see them
+  # when the user loads the package, not when R (possibly on startup)
   # decides to load the package.
 }
 
@@ -51,11 +51,11 @@ on_aboutdialog_response <- function(object, ...)
 {
   # print("ATTACH")
 
-  # 101009 This is executed when the package becomes visible to the
-  # user, which is usually following a library(rattle). Note that on
-  # restoring an .RData file the package might get loaded on starting
-  # up R and thus the .onLoad is executed then, but the ATTACH code
-  # won't get loaded until we do library(rattle).
+  # 20101009 gjw This is executed when the package becomes visible to
+  # the user, which is usually following a library(rattle). Note that
+  # on restoring an .RData file the package might get loaded on
+  # starting up R and thus the .onLoad is executed then, but the
+  # ATTACH code won't get loaded until we do library(rattle).
 
   # 090315 Create the crs environment here. It is defined here and
   # then also reset in rattle() so that R CMD check would not complain
@@ -123,7 +123,7 @@ on_aboutdialog_response <- function(object, ...)
   crv$rattleUI <- "rattle.ui"
   # if (Sys.info()["sysname"] == "Darwin") crv$rattleUI <- "rattle_macosx.ui"
 
-  crv$log.intro <- paste0("# Rattle is Copyright (c) 2006-2023 Togaware Pty Ltd.",
+  crv$log.intro <- paste0("# Rattle is Copyright (c) 2006-2026 Togaware Pty Ltd.",
                           "\n# It is free (as in libre) open source software.",
                           "\n# It is licensed under the GNU General Public License,",
                           "\n# Version 2. Rattle comes with ABSOLUTELY NO WARRANTY.",
@@ -131,7 +131,7 @@ on_aboutdialog_response <- function(object, ...)
                           "\n# from others as acknowledged in 'library(help=rattle)'.",
                           "\n# Visit https://rattle.togaware.com/ for details.")
   crv$support.msg <- sprintf(Rtxt("If this is a bug please contact %s.\n\n%s"),
-                             "support@togaware.com",
+                             "rattle.support@togaware.com",
                              Rtxt("Please supply the output of rattleInfo()",
                                   "and the steps required to replicate the problem."))
   crv$library.command <- "library(rattle)"
@@ -261,14 +261,20 @@ on_aboutdialog_response <- function(object, ...)
   # 091221 The Rtxt does not seem to work from the rattle.R file, so
   # do it here again.
 
-  COPYRIGHT <- sprintf(Rtxt("Copyright (c) 2006-2023 %s."), "Togaware Pty Ltd")
+  COPYRIGHT <- sprintf(Rtxt("Copyright (c) 2006-2026 %s."), "Togaware Pty Ltd")
 
-  msg <- paste(Rtxt("Rattle: A free graphical interface",
-                    "for data science with R."), "\n",
+  msg <- paste(Rtxt("Rattle: Supporting the free graphical interface",
+                    "for data science and AI with R."), "\n",
                Rtxt("Version"), " ", VERSION, " ",
                COPYRIGHT, "\n",
-#LICENSE
-               Rtxt("Type 'rattle()' to shake, rattle, and roll your data."),
+               #LICENSE
+               Rtxt("Rattle v5.6 and beyond supports the Flutter UI."),
+               "\n",
+               Rtxt("Rattle v5.5.1 and earlier use the deprecated RGtk2."),
+               "\n",
+               Rtxt("Visit https://rattle.togaware.com to install the Rattle app."),
+               "\n",
+               Rtxt("You are then ready to shake, rattle, and roll your data."),
                "\n",
                sep="")
 

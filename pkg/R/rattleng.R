@@ -103,14 +103,7 @@ find_fewest_levels <- function(df) {
 # A Rattle Theme for Graphics
 ####################################
 
-# A palette for rattle!
-## 20260118 gjw MOVED TO R RATTLE PACKAGE
-
-rattlePalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
-                   "#0072B2", "#D55E00", "#CC79A7", "#000000")
-
 # A ggplot2 theme for rattle.
-## 20260118 gjw MOVED TO R RATTLE PACKAGE
 
 theme_rattle <- function(base_size = 11, base_family = "") {
   ggplot2::theme_grey(base_size = base_size, base_family = base_family) +
