@@ -113,6 +113,10 @@ cran:
 	@echo "========================================================================"
 	@R --quiet -e 'foghorn::summary_cran_results(pkg="rattle")'
 	@echo "========================================================================"
+	@R --quiet -e 'foghorn::cran_details(pkg="rattle")'
+	@echo "========================================================================"
+	@R --quiet -e 'foghorn::cran_incoming(pkg="rattle")'
+	@echo "========================================================================"
 
 .PHONY: src
 src: $(APP)_$(VER)_src.zip  $(APP)_$(VER)_src.tar.gz
