@@ -3,3 +3,6 @@ repository/PACKAGES*
 repository/rattle_*
 inst/etc/rattle.ui.*
 *~
+*.tar.gz
+*Rcheck*
+.Rhistory
